@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ExpenseTrackingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('expense.index');
 });
+
+Route::get('/expense', [ExpenseTrackingController::class, 'index'])->name('expense.index');
+Route::get('/expense/create', [ExpenseTrackingController::class, 'create'])->name('expense.create');
+Route::post('/expense/store', [ExpenseTrackingController::class, 'store'])->name('expense.store');
+Route::get('/expense/show/{id}', [ExpenseTrackingController::class, 'show'])->name('expense.show');
+Route::get('/expense/{id}/edit', [ExpenseTrackingController::class, 'edit'])->name('expense.edit');
+Route::put('/expense/{id}', [ExpenseTrackingController::class, 'update'])->name('expense.update');
